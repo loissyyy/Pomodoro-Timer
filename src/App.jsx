@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
@@ -8,32 +7,52 @@ import Settings from './Settings';
 import ManageTimersModal from './ManageTimersModal';
 
 const Container = styled.div`
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background: #f0e5e5;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-image: url('img02.jpg'); 
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+
+
+  @media only screen and (min-width: 900px) {
+     background-image: url('images/img01.jpg');
+     background-size: cover;
+  }
 `;
 
 const Header = styled.h1`
-  color: #6a4a4a;
+  color: #0d0f0e;
   margin-bottom: 20px;
+  font-size: 4em;
+
+
+`;
+
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 `;
 
 const Button = styled.button`
-  padding: 10px 20px;
+  padding: 5px 5px;
   font-size: 1em;
   cursor: pointer;
-  background-color: brown;
-  color: white;
+  background-color: #9e7f7f;
+  color: #c9dcf8;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   margin: 10px 5px;
 
   &:hover {
-    background-color: #5a1313;
+    background-color: #2e405c;
+    color: white;
   }
 `;
 
@@ -60,7 +79,7 @@ const App = () => {
   }, []);
 
   const handleSelectTimer = (timer) => {
-    setWorkTime(timer.work);
+    setWorkTime(timer.workTime);
     setShortBreakTime(timer.shortBreakTime);
     setLongBreakTime(timer.longBreakTime);
     setSessionsBeforeLongBreak(timer.sessionsBeforeLongBreak);
@@ -70,7 +89,7 @@ const App = () => {
 
   const saveTimer = () => {
     const timers = JSON.parse(localStorage.getItem('timers')) || [];
-    const newTimer = { title, work: workTime, shortBreakTime, longBreakTime, sessionsBeforeLongBreak };
+    const newTimer = { title, workTime, shortBreakTime, longBreakTime, sessionsBeforeLongBreak };
     timers.push(newTimer);
     localStorage.setItem('timers', JSON.stringify(timers));
     alert('Timer saved successfully!');
@@ -94,20 +113,24 @@ const App = () => {
           setSessionComplete(complete);
           if (complete) setShowConfetti(true);
         }}
+        showConfetti={showConfetti}
+        setShowConfetti={setShowConfetti}
       />
-      <Button onClick={() => setIsSettingsModalOpen(true)}>Create Timer</Button>
-      {isSettingsModalOpen && (
-        <Settings
-          setWorkTime={setWorkTime}
-          setShortBreakTime={setShortBreakTime}
-          setLongBreakTime={setLongBreakTime}
-          setSessionsBeforeLongBreak={setSessionsBeforeLongBreak}
-          setTitle={setTitle}
-          onClose={() => setIsSettingsModalOpen(false)}
-        />
-      )}
-      <Button onClick={saveTimer}>Save Timer</Button>
-      <Button onClick={() => setIsManageModalOpen(true)}>Manage Timers</Button>
+      <ButtonContainer>
+        <Button onClick={() => setIsSettingsModalOpen(true)}>Create Timer</Button>
+        {isSettingsModalOpen && (
+          <Settings
+            setWorkTime={setWorkTime}
+            setShortBreakTime={setShortBreakTime}
+            setLongBreakTime={setLongBreakTime}
+            setSessionsBeforeLongBreak={setSessionsBeforeLongBreak}
+            setTitle={setTitle}
+            onClose={() => setIsSettingsModalOpen(false)}
+          />
+        )}
+        <Button onClick={saveTimer}>Save Timer</Button>
+        <Button onClick={() => setIsManageModalOpen(true)}>Manage Timers</Button>
+      </ButtonContainer>  
       {isManageModalOpen && (
         <ManageTimersModal onClose={() => setIsManageModalOpen(false)} onSelectTimer={handleSelectTimer} />
       )}

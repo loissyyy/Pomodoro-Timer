@@ -18,7 +18,7 @@ const ModalOverlay = styled.div`
 
 const ModalContent = styled.div`
   position: relative;
-  background: #994444;
+  background: #2e405c;
   padding: 20px;
   border-radius: 10px;
   width: 80%;
@@ -32,7 +32,7 @@ const CloseButton = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: eea7a7;
+  background-color: #eea7a7;
   border: none;
   font-size: 1.5em;
   cursor: pointer;
@@ -46,7 +46,7 @@ const SettingsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #863c3c; /* Light background color */
+  background: #2d405e; /* Light background color */
   padding: 20px;
   border-radius: 10px;
   margin: 20px;
@@ -56,30 +56,30 @@ const SettingsContainer = styled.div`
 const InputField = styled.input`
   padding: 10px;
   margin: 10px 0;
-  border: 2px solid #b87474;
-  background-color: #af6161 ;
+  border: 2px solid #254174;
+  background-color: #4a6aa5 ;
   color: #e4d7d7;
   border-radius: 5px;
   font-size: 1em;
   width: 100%;
 
   &:focus {
-    border-color: #9e1616;
+    border-color: #f8f2f2;
     outline: none;
   }
 `;
 
 const Label = styled.label`
   font-size: 1em;
-  color: #f3eaea;
+  color: #f5efef;
   margin-bottom: 5px;
 `;
 
 const Button = styled.button`
   padding: 10px 20px;
   margin: 10px 0;
-  background-color: #5a1313;
-  color: #fff;
+  background-color: #273a58;
+  color: #dfe8f8;
   border: none;
   border-radius: 5px;
   font-size: 1em;
@@ -87,7 +87,7 @@ const Button = styled.button`
   width: 100%;
 
   &:hover {
-    background-color: #490b0b;
+    background-color: #223147;
   }
 
   &:not(:last-child) {
@@ -101,12 +101,12 @@ const Settings = ({
   setLongBreakTime,
   setSessionsBeforeLongBreak,
   setTitle,
-  onClose, // Add onClose prop to handle closing the modal
+  onClose,
 }) => {
-  const [work, setWork] = useState(''); // Default work time in minutes
-  const [shortBreak, setShortBreak] = useState(''); // Default short break time in minutes
-  const [longBreak, setLongBreak] = useState(''); // Default long break time in minutes
-  const [sessions, setSessions] = useState(''); // Default sessions before long break
+  const [work, setWork] = useState('');
+  const [shortBreak, setShortBreak] = useState(''); 
+  const [longBreak, setLongBreak] = useState('');
+  const [sessions, setSessions] = useState(''); 
   const [timerTitle, setTimerTitle] = useState('');
 
   const handleSubmit = () => {
@@ -116,13 +116,13 @@ const Settings = ({
       setLongBreakTime(parseInt(longBreak));
       setSessionsBeforeLongBreak(parseInt(sessions));
       setTitle(timerTitle);
-      alert('Settings saved successfully!');
+      alert('Timer saved successfully!');
       setWork('');
       setShortBreak('');
       setLongBreak('');
       setSessions('');
       setTimerTitle('');
-      onClose(); // Close the modal after saving
+      onClose();
     } else {
       alert('Please set a title and work time.');
     }
@@ -168,7 +168,7 @@ const Settings = ({
             onChange={(e) => setSessions(e.target.value)}
             placeholder="Sessions Before Long Break"
           />
-          <Button onClick={handleSubmit}>Save Settings</Button>
+          <Button onClick={handleSubmit}>Create timer</Button>
         </SettingsContainer>
       </ModalContent>
     </ModalOverlay>

@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -18,7 +17,7 @@ const ModalOverlay = styled.div`
 
 const ModalContent = styled.div`
   position: relative;
-  background: #eea7a7;
+  background: #384a6d;
   padding: 20px;
   border-radius: 10px;
   width: 80%;
@@ -26,9 +25,7 @@ const ModalContent = styled.div`
   max-height: 80%;
   overflow-y: auto;
 
-  @media only screen and (min-width: 900px) {
-    background: #994444;
-  }
+
 `;
 
 const CloseButton = styled.button`
@@ -55,7 +52,7 @@ const Table = styled.table`
 const Th = styled.th`
   border: 1px solid #ddd;
   padding: 10px;
-  background-color: #863c3c;
+  background-color: #2e405c;
   color: white;
 `;
 
@@ -65,7 +62,7 @@ const Td = styled.td`
   cursor: pointer;
 
   &:hover {
-    background-color: #863c3c;
+    background-color: #2e405c;
     color: white;
   }
 `;
@@ -74,14 +71,14 @@ const Button = styled.button`
   padding: 5px 1px;
   font-size: 1em;
   cursor: pointer;
-  background-color: #dd9393;
-  color: brown;
+  background-color: #2e4364;
+  color: #dee5f0;
   border: none;
   border-radius: 50px;
 
   &:hover {
-    background-color: #501919;
-    color: white;
+    background-color: #f5baba;
+    color: #080808;
   }
 
   &:not(:last-child) {
@@ -110,13 +107,13 @@ const ManageTimersModal = ({ onClose, onSelectTimer }) => {
 
   const editTimer = (index) => {
     const title = prompt('Enter new title:', timers[index].title);
-    const work = parseInt(prompt('Enter new work time (minutes):', timers[index].work));
-    const shortBreak = parseInt(prompt('Enter new short break time (minutes):', timers[index].shortBreak));
-    const longBreak = parseInt(prompt('Enter new long break time (minutes):', timers[index].longBreak));
+    const workTime = parseInt(prompt('Enter new work time (minutes):', timers[index].workTime));
+    const shortBreakTime = parseInt(prompt('Enter new short break time (minutes):', timers[index].shortBreakTime));
+    const longBreakTime = parseInt(prompt('Enter new long break time (minutes):', timers[index].longBreakTime));
     const sessionsBeforeLongBreak = parseInt(prompt('Enter sessions before long break:', timers[index].sessionsBeforeLongBreak));
-    if (title && work && shortBreak && longBreak && sessionsBeforeLongBreak) {
+    if (title && workTime && shortBreakTime && longBreakTime && sessionsBeforeLongBreak) {
       const newTimers = timers.map((timer, i) =>
-        i === index ? { title, work, shortBreak, longBreak, sessionsBeforeLongBreak } : timer
+        i === index ? { title, workTime, shortBreakTime, longBreakTime, sessionsBeforeLongBreak } : timer
       );
       setTimers(newTimers);
       localStorage.setItem('timers', JSON.stringify(newTimers));
